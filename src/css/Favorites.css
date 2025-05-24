@@ -1,16 +1,16 @@
-.favorites {
+/* .favorites {
   padding: 2rem;
   width: 100%;
   box-sizing: border-box;
-}
+} */
 
-.favorites h2 {
+/* .favorites h2 {
   margin-bottom: 2rem;
   text-align: center;
   font-size: 2.5rem;
-  /* color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); */
-}
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+} */
 
 .favorites-empty {
   text-align: center;

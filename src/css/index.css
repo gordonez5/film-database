@@ -30,7 +30,7 @@ body {
   position: relative;
 }
 
-#root {
+.wrapper {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -67,7 +67,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto red;
 }
 
 @media (prefers-color-scheme: light) {

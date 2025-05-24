@@ -1,24 +1,39 @@
 import { Routes, Route } from "react-router-dom";
 
-import { MovieProvider } from "./contexts/MovieContext/MovieProvider";
-import NavBar from "./components/NavBar";
+import { MovieProvider } from "./contexts/MovieContext";
+import { SettingsProvider } from "./contexts/SettingsContext";
+
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+// import ViewToggle from "./components/ViewToggle";
+// import ThemeToggle from "./components/ThemeToggle";
+import PreferencesPanel from "./components/PreferencesPanel";
+
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import Library from "./pages/Library";
-import "./css/App.css";
+// import "./css/App.css";
 
 function App() {
   return (
-    <MovieProvider>
-      <NavBar />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/favorites" element={<Favorites />} />
-        </Routes>
-      </main>
-    </MovieProvider>
+    <SettingsProvider>
+      <MovieProvider>
+
+        <Header />
+
+        <main className="main-content">
+          <PreferencesPanel />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/favorites" element={<Favorites />} />
+          </Routes>
+        </main>
+
+        <Footer />
+
+      </MovieProvider>
+    </SettingsProvider>
   );
 }
 

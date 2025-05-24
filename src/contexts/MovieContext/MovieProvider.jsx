@@ -5,20 +5,16 @@ import { actionTypes } from "./actionTypes";
 const MovieContext = createContext();
 export const useMovieContext = () => useContext(MovieContext);
 
-export const MovieProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(movieReducer, initialState);
+const MovieProvider = ({ children }) => {
 
-  useEffect(() => {
-    try {
-      const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-      const storedOwned = JSON.parse(localStorage.getItem("owned")) || [];
-
-      dispatch({ type: actionTypes.SET_FAVORITES, payload: storedFavorites });
-      dispatch({ type: actionTypes.SET_OWNED, payload: storedOwned });
-    } catch (e) {
-      console.error("Error loading from localStorage:", e);
-    }
-  }, []);
+  const [state, dispatch] = useReducer(
+    movieReducer,
+    undefined,
+    () => ({
+      favorites: JSON.parse(localStorage.getItem("favorites")) || initialState.favorites,
+      owned: JSON.parse(localStorage.getItem("owned")) || initialState.owned,
+    })
+  );
 
   useEffect(() => {
     try {
@@ -27,7 +23,7 @@ export const MovieProvider = ({ children }) => {
     } catch (e) {
       console.error("Error saving to localStorage:", e);
     }
-  }, [state]);
+  }, [state.favorites, state.owned]);
 
   const addToFavorites = (movie) =>
     dispatch({ type: actionTypes.ADD_FAVORITE, payload: movie });
@@ -62,3 +58,5 @@ export const MovieProvider = ({ children }) => {
     </MovieContext.Provider>
   );
 };
+
+export default MovieProvider;

@@ -1,0 +1,38 @@
+@use "../abstracts/mixins" as *;
+
+.main-content {
+  // box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+
+  @include mq(md) {
+    padding: 2rem;
+  }
+}
+
+.preferences-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.content {
+  padding: 2rem 0;
+}
+
+.sort-toggle,
+.theme-toggle,
+.view-toggle {
+  display: flex;
+  gap: 2px;
+
+  .view-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+

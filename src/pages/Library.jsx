@@ -1,20 +1,46 @@
-import "../css/Library.css";
-import { useMovieContext } from "../contexts/MovieContext/MovieProvider";
-import MovieCard from "../components/MovieCard";
+import fuzzyFilterFactory from "react-fuzzy-filter";
+
+import { useMovieContext } from "../contexts/MovieContext";
+import { useSettings } from "../contexts/SettingsContext";
+import MovieListView from "../components/MovieListView";
 
 function Library() {
   const { library } = useMovieContext();
+  const { settings } = useSettings();
+  // these components share state and can even live in different components
+  const { InputFilter, FilterResults, changeInputValue } = fuzzyFilterFactory();
+  const fuseConfig = {
+    keys: [
+      "title",
+      // "overview"
+    ],
+  };
 
   if (library && library.length) {
     console.log(library);
     return (
-      <div className="library">
-        <h2>Your Library</h2>
-        <div className="movies-grid">
-          {library.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} />
-          ))}
-        </div>
+      <div
+        className="content"
+        data-page="library"
+        data-sort={`${settings.sort}-sort`}
+        data-view={`${settings.view}-view`}
+      >
+        <h2>Your Library ({library.length})</h2>
+        <InputFilter debounceTime={200} />
+        <FilterResults defaultAllItems={true} items={library} fuseConfig={fuseConfig}>
+          {filteredItems => {
+            return (
+              <MovieListView
+                items={filteredItems}
+                pageview="library"
+              />
+            );
+          }}
+        </FilterResults>
+        {/* <MovieListView
+          items={library}
+          pageview="library"
+        /> */}
       </div>
     );
   }

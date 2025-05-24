@@ -1,9 +1,13 @@
-import MovieCard from "../components/MovieCard";
 import { useState, useEffect } from "react";
+
 import { searchMovies, getPopularMovies } from "../services/api";
+import { useSettings } from "../contexts/SettingsContext";
+import MovieListView from "../components/MovieListView";
+
 import "../css/Home.css";
 
 function Home() {
+  const { settings } = useSettings();
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
@@ -44,7 +48,7 @@ function Home() {
   };
 
   return (
-    <div className="home">
+    <div className="content" data-page="home">
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
@@ -53,12 +57,12 @@ function Home() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button type="submit" className="search-button">
+        <button type="submit" className="btn btn--secondary">
           Search
         </button>
       </form>
 
-        {error && <div className="error-message">{error}</div>}
+      {error && <div className="error-message">{error}</div>}
 
       {loading
         ? (
@@ -66,10 +70,11 @@ function Home() {
           )
         : movies.length
           ? (
-            <div className="movies-grid">
-              {movies.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
-              ))}
+            <div className="search" data-view={settings.view === "grid" ? "grid-view" : "list-view"}>
+              <h3>Results</h3>
+              <MovieListView
+                items={movies}
+              />
             </div>
             )
           : (

@@ -35,6 +35,9 @@ export const movieReducer = (state, action) => {
         owned: state.owned.filter(m => m.id !== action.payload),
       };
 
+      case actionTypes.RESET:
+        return initialState;
+
     default:
       return state;
   }
