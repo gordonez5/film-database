@@ -68,7 +68,7 @@ function Home() {
         ? (
           <div className="loading">Loading...</div>
           )
-        : movies.length
+        : movies && movies.length
           ? (
             <div className="search" data-view={settings.view === "grid" ? "grid-view" : "list-view"}>
               <h3>Results</h3>

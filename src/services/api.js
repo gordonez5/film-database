@@ -1,8 +1,8 @@
-const API_KEY = "38f66f26ff10a58f192e9545015e7b4c";
-const BASE_URL = "https://api.themoviedb.org/3";
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export const getPopularMovies = async () => {
-  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+  const response = await fetch(`${apiUrl}/movie/popular?api_key=${apiKey}`);
   const data = await response.json();
   // console.log(data.results);
   return data.results;
@@ -10,7 +10,7 @@ export const getPopularMovies = async () => {
 
 export const searchMovies = async (query) => {
   const response = await fetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+    `${apiUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
       query
     )}`
   );
