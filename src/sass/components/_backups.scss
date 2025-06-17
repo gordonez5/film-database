@@ -1,0 +1,19 @@
+.library-backup-manager {
+  // padding: 1rem;
+}
+
+[data-page="backups"] table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+[data-page="backups"] th,
+[data-page="backups"] td {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+[data-page="backups"] button {
+  // margin-right: 0.5rem;
+}

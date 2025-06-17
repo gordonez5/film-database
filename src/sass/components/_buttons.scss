@@ -1,5 +1,11 @@
 @use "../abstracts" as *;
 
+.button-container {
+  display: flex;
+  gap: 1rem;
+  // justify-content: space-between;
+}
+
 button {
   // border-radius: 8px;
   // border: 1px solid transparent;
@@ -32,9 +38,19 @@ button {
     outline: none;
   }
 
+  &--tertiary {
+    background-color: var(--clr-secondary);
+  }
+
   // @media (prefers-color-scheme: light) {
   //   background-color: #f9f9f9;
   // }
+
+  &-icon {
+    &.left {
+      margin-right: 0.5rem;
+    }
+  }
 
   &--toggle {
     align-items: center;
